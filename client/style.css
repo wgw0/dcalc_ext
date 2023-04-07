@@ -99,7 +99,6 @@ section {
   padding: 0.5em 0.7em;
   border: 1px solid #ccc;
   font-family: "Calibri", sans-serif;
-  font-size: 1rem;
 }
 
 #display-text {
@@ -139,66 +138,56 @@ section input[type="number"]{
   border: 1px solid #ccc;
 }
 
-/*hvhvjhhj*/
+/* RANGE SLIDERS STYLING */
 
 section .range-input {
-  -webkit-appearance: none;
   position: relative;
-  width: 100%;
   margin: 0;
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 input[type=range] {
   height: 10px;
-  -webkit-appearance: none;
   margin: 10px 0;
   width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
+input[type=range]::-moz-range-track,
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 6px;
-  cursor: pointer;
-  animate: 0.2s;
   background: #AC51B5;
+  border-radius: 50px;
+  cursor: pointer;
+  animation: 0.2s;
 }
-input[type=range]::-webkit-slider-thumb {
-  border: 0px solid #000000;
+
+input[type=range]::-moz-range-thumb,
+input[type=range]::-webkit-slider-thumb,
+input[type=range]::-ms-thumb {
   height: 17px;
   width: 17px;
-  border-radius: 50px;
   background: #65001C;
+  border-radius: 50px;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -5.5px;
 }
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #AC51B5;
-}
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 6px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: #AC51B5;
-  border-radius: 50px;
-}
-input[type=range]::-moz-range-thumb {
-  height: 17px;
-  width: 17px;
-  border-radius: 50px;
-  background: #65001C;
-  cursor: pointer;
-}
+
 input[type=range]::-ms-track {
   width: 100%;
   height: 6px;
-  cursor: pointer;
-  animate: 0.2s;
   background: transparent;
   border-color: transparent;
   color: transparent;
+  cursor: pointer;
+  animation: 0.2s;
 }
+
 input[type=range]::-ms-fill-lower {
   background: #AC51B5;
   border-radius: 100px;
@@ -207,22 +196,16 @@ input[type=range]::-ms-fill-lower {
 input[type=range]::-ms-fill-upper {
   background: #AC51B5;
 }
-input[type=range]::-ms-thumb {
-  margin-top: 1px;
-  height: 17px;
-  width: 17px;
-  background: #65001C;
-  cursor: pointer;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #AC51B5;
-}
+
+input[type=range]:focus::-moz-range-track,
+input[type=range]:focus::-webkit-slider-runnable-track,
+input[type=range]:focus::-ms-fill-lower,
 input[type=range]:focus::-ms-fill-upper {
   background: #AC51B5;
 }
 
 
-/*hvhvjhhj*/
+/* INPUT STYLING */
 
 input[type="number"]:disabled {
   color: gray;
