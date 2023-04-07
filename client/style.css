@@ -97,7 +97,7 @@ section {
   justify-content: center;
   width: 120px;
   padding: 0.5em 0.7em;
-  border: 1px solid #ccc;
+  border: 1px solid #888;
   font-family: "Calibri", sans-serif;
 }
 
@@ -135,7 +135,9 @@ section input[type="number"]{
   justify-content: center;
   width: 1px;
   padding: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #888;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 
@@ -149,6 +151,7 @@ input[type=range] {
   appearance: none;
   margin: 10px 0;
   width: 100%;
+  padding-bottom: 8px;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
