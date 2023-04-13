@@ -18,6 +18,16 @@ function init() {
     }
   });
 
+  const clearButton = document.getElementById("ClearButton");
+
+  clearButton.addEventListener("click", function() {
+    const inputs = document.getElementsByTagName("input");
+
+    for (const input of inputs) {
+      input.value = '';
+    }
+  });
+
   const inputs = document.querySelectorAll('input[type="range"]');
   for (const input of inputs) {
     input.addEventListener('input', recalculate);
