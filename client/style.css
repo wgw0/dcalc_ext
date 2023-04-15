@@ -126,20 +126,20 @@ section {
   margin-bottom: .5rem;
 }
 
-.module>* {
+/* .module>* {
   flex-grow: 0.33;
-}
+} */
 
 section input[type="number"]{
   text-align: center;
   justify-content: center;
-  width: 1px;
+  width: 50px;
   padding: 5px;
   border: 1px solid #888;
   margin-left: 5px;
   margin-right: 5px;
+  right: 0;
 }
-
 
 /*********************************************
  * RANGE SLIDERS STYLING
@@ -150,8 +150,13 @@ input[type=range] {
   -webkit-appearance: none;
   appearance: none;
   margin: 10px 0;
-  width: 100%;
+  width: 90%;
   padding-bottom: 8px;
+}
+
+input[type=range]:disabled::-webkit-slider-runnable-track,
+input[type=range]:disabled::-webkit-slider-thumb {
+  background: gray;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
@@ -161,6 +166,7 @@ input[type=range]::-webkit-slider-runnable-track {
   /* animate: 0.2s; */
   background: #AC51B5;
 }
+
 input[type=range]::-webkit-slider-thumb {
   border: 0px solid #000000;
   height: 17px;
@@ -243,7 +249,8 @@ input {
 }
 
 input[type='text']{
-  border: var(--border) solid 1px; 
+  border: var(--border) solid 1px;
+  width:100%;
 }
 
 input[disabled] {
@@ -280,33 +287,30 @@ input::-webkit-inner-spin-button {
   margin: 0 auto;
   transform: scale(2);
 }
+/*********************************************
+ * LOCKING BUTTONS
+ *********************************************/
 
-.lock-button {
-  background-image: url("./img/unlock-icon.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  width: flex; 
-  height: flex; 
-  border: none;
-  cursor: pointer;
-  background-color: #FFF;
-}
+ input[type="checkbox"] {
+  vertical-align: middle;
+  transform: scale(2.7);
+  margin-left: 10px;
+ }
 
-.lock-button.disabled {
-  background-image: url("./img/lock-icon.png");
-}
+/* section input[type='checkbox'].disabled {
+  margin: 1px;
+} */
 
+
+/*********************************************
+* BUTTON STYLING,
+adapted from: https://uiverse.io/e-coders/nervous-chipmunk-49
+*********************************************/
 #ClearButtonDiv{
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/*********************************************
- * BUTTON STYLING,
- adapted from: https://uiverse.io/e-coders/nervous-chipmunk-49
- *********************************************/
 
 #ClearButton,
 #copy {
