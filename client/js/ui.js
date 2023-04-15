@@ -195,16 +195,25 @@ async function recalculate() {
   const b = rules.ruleB(marks);
   const c = rules.ruleC(marks);
 
+  const fyEntry = document.querySelector('#fyEntryCheck').checked;
+ 
   document.querySelector('#ruleA').textContent = a;
   document.querySelector('#ruleB').textContent = b;
   document.querySelector('#ruleC').textContent = c;
-
+  if (!fyEntry) {
   const finalMark = Math.max(a, b, c);
   const finalClassification = rules.toClassification(finalMark);
 
   document.querySelector('#finalClassification').textContent = finalClassification;
 
   document.querySelector('#gpa').textContent = rules.gpa(marks);
+  } else {
+   const finalMark = b;
+   const finalClassification = rules.toClassification(finalMark);
+   document.querySelector('#finalClassification').textContent = finalClassification;
+
+   document.querySelector('#gpa').textContent = rules.gpa(marks);
+  }
 }
 
 function isAnyMarkUnder40(marks) {
