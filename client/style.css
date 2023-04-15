@@ -287,14 +287,29 @@ input::-webkit-inner-spin-button {
   margin: 0 auto;
   transform: scale(2);
 }
+
 /*********************************************
  * LOCKING BUTTONS
  *********************************************/
+
+ .inputheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputheader h2 {
+  justify-self: flex-start;
+}
+
+.inputheader h3 {
+  justify-self: flex-end;
+}
 
  input[type="checkbox"] {
   vertical-align: middle;
   transform: scale(2.7);
   margin-left: 10px;
+  accent-color: #621360;
  }
 
 /* section input[type='checkbox'].disabled {
