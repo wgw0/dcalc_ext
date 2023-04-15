@@ -199,18 +199,6 @@ ul {
   padding: 0;
 }
 
-
-
-/* .module :first-child {
-  flex-grow: 0;
-  margin-right: .5rem;
-} */
-
-/* .module span {
-  padding: 0.5ex 1ex;
-} */
-
-
 input {
   background: var(--bg);
   color: var(--fg);
@@ -242,11 +230,6 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-input:focus {
-  outline: 0.25rem var(--hibg) solid;
-}
-
-
 #finalClassification,
 #gpa,
 #rules span {
@@ -254,6 +237,11 @@ input:focus {
   font-weight: bold;
 }
 
+#fyEntryCheck {
+  display: block;
+  margin: 0 auto;
+  transform: scale(2);
+}
 
 .lock-button {
   background-image: url("./img/unlock-icon.png");
