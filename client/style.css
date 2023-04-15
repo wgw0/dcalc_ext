@@ -282,7 +282,16 @@ input::-webkit-inner-spin-button {
   font-weight: bold;
 }
 
-#fyEntryCheck {
+#filterSection{
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+#filterSection input[type="checkbox"] {
   display: block;
   margin: 0 auto;
   transform: scale(2);
