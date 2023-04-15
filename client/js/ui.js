@@ -179,9 +179,7 @@ async function recalculate() {
     document.querySelector('#gpa').textContent = 'n/a';
     return;
   }
-  
-  const fyEntry = document.querySelector('#fyEntryCheck').checked;
-  if (!fyEntry) {
+
     if (isAnyMarkUnder40(marks)) {
       document.querySelector('#ruleA').textContent = 'n/a';
       document.querySelector('#ruleB').textContent = 'n/a';
@@ -190,7 +188,6 @@ async function recalculate() {
       document.querySelector('#gpa').textContent = 'n/a';
       return;
     }
-  }
 
   rules.prepareMarks(marks);
 
@@ -211,9 +208,15 @@ async function recalculate() {
 }
 
 function isAnyMarkUnder40(marks) {
+  const fyEntry = document.querySelector('#fyEntryCheck').checked;
+  if (!fyEntry) {
   return marks.fyp < 40 ||
     marks.l5.some(m => m < 40) ||
     marks.l6.some(m => m < 40);
+  } else {
+    return marks.fyp < 40 ||
+    marks.l6.some(m => m < 40);
+  }
 }
 
 async function gatherMarksFromPage() {
