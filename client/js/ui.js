@@ -48,6 +48,15 @@ function init() {
 
   /// END of button and slider section
 
+  const fyEntryCheck = document.getElementById("fyEntryCheck");
+  fyEntryCheck.addEventListener('change', () => {
+    const sectionL5 = document.getElementById("l5");
+    const inputsL5 = sectionL5.querySelectorAll('input');
+    for (const input of inputsL5) {
+      input.disabled = fyEntryCheck.checked;
+      input.classList.toggle('disabled', fyEntryCheck.checked);
+    }
+  });
 
   const allInputs = document.querySelectorAll('.module input');
   for (const input of allInputs) {
