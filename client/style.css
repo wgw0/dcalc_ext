@@ -275,6 +275,11 @@ input::-webkit-inner-spin-button {
   font-weight: bold;
 }
 
+#fyEntryCheck {
+  display: block;
+  margin: 0 auto;
+  transform: scale(2);
+}
 
 .lock-button {
   background-image: url("./img/unlock-icon.png");
