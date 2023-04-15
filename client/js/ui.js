@@ -179,14 +179,17 @@ async function recalculate() {
     document.querySelector('#gpa').textContent = 'n/a';
     return;
   }
-
-  if (isAnyMarkUnder40(marks)) {
-    document.querySelector('#ruleA').textContent = 'n/a';
-    document.querySelector('#ruleB').textContent = 'n/a';
-    document.querySelector('#ruleC').textContent = 'n/a';
-    document.querySelector('#finalClassification').textContent = 'failed a module, no degree classification';
-    document.querySelector('#gpa').textContent = 'n/a';
-    return;
+  
+  const fyEntry = document.querySelector('#fyEntryCheck').checked;
+  if (!fyEntry) {
+    if (isAnyMarkUnder40(marks)) {
+      document.querySelector('#ruleA').textContent = 'n/a';
+      document.querySelector('#ruleB').textContent = 'n/a';
+      document.querySelector('#ruleC').textContent = 'n/a';
+      document.querySelector('#finalClassification').textContent = 'failed a module, no degree classification';
+      document.querySelector('#gpa').textContent = 'n/a';
+      return;
+    }
   }
 
   rules.prepareMarks(marks);
