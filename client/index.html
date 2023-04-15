@@ -15,11 +15,9 @@
 <main>
 
   <section id="up-number-input">
-    <h2>Input your UP number to get your data:</h2>
+    <h4>Input your UP number to get your data:</h4>
     <div class="input-container">
-      <input type="text" id="up-input" required="UP">
-      <label for="up-input" class="label">UPXXXXXXX</label>
-      <div class="underline"></div>
+      <input type="text" id="up-input" placeholder="UP1234567" required="number" maxlength="15">
     </div>
     <p id="display-text">&nbsp;</p>
   </section>
@@ -134,11 +132,6 @@
       <input id="fyp" type="number" value="0" min="0" max="100">
       <button class="lock-button" id="16mark4"></button>
     </div>
-    <input class="range-input" id="fyp" type="range" min="0" max="100" value="0">
-  </ul>
-  <div id="ClearButtonDiv">
-    <button id="ClearButton">Clear</button>
-  </div>
   </section>
 
   <datalist id="module-list">
@@ -193,10 +186,10 @@
 </section>
 
 <nav id="source">
-  <a href="https://github.com/portsoc/dcalc">Source</a>
+  <a href="https://github.com/portsoc/dcalc"  target="blank_">Source</a>
   <input type="checkbox" id="theme-switch">
   <label for="theme-switch"></label>
 </nav>
 
-<script src="js/service-worker-loader.js" type="module"></script>
+<script src="js/service-worker-loader.js" type="module" target="blank_"></script>
 <script src="js/ui.js" type="module"></script>

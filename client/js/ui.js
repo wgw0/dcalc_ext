@@ -206,22 +206,22 @@ async function recalculate() {
   const marks = await gatherMarksFromPage();
 
   if (!marks) {
-    document.querySelector('#ruleA').textContent = 'n/a';
-    document.querySelector('#ruleB').textContent = 'n/a';
-    document.querySelector('#ruleC').textContent = 'n/a';
+    document.querySelector('#ruleA').textContent = 'N/A';
+    document.querySelector('#ruleB').textContent = 'N/A';
+    document.querySelector('#ruleC').textContent = 'N/A';
     document.querySelector('#finalClassification').textContent = 'not enough data';
-    document.querySelector('#gpa').textContent = 'n/a';
+    document.querySelector('#gpa').textContent = 'N/A';
     return;
   }
 
-    if (isAnyMarkUnder40(marks)) {
-      document.querySelector('#ruleA').textContent = 'n/a';
-      document.querySelector('#ruleB').textContent = 'n/a';
-      document.querySelector('#ruleC').textContent = 'n/a';
-      document.querySelector('#finalClassification').textContent = 'failed a module, no degree classification';
-      document.querySelector('#gpa').textContent = 'n/a';
-      return;
-    }
+  if (isAnyMarkUnder40(marks)) {
+    document.querySelector('#ruleA').textContent = 'N/A';
+    document.querySelector('#ruleB').textContent = 'N/A';
+    document.querySelector('#ruleC').textContent = 'N/A';
+    document.querySelector('#finalClassification').textContent = 'Failed a module, no degree classification';
+    document.querySelector('#gpa').textContent = 'N/A';
+    return;
+  }
 
   rules.prepareMarks(marks);
 
@@ -229,16 +229,25 @@ async function recalculate() {
   const b = rules.ruleB(marks);
   const c = rules.ruleC(marks);
 
+  const fyEntry = document.querySelector('#fyEntryCheck').checked;
+ 
   document.querySelector('#ruleA').textContent = a;
   document.querySelector('#ruleB').textContent = b;
   document.querySelector('#ruleC').textContent = c;
-
+  if (!fyEntry) {
   const finalMark = Math.max(a, b, c);
   const finalClassification = rules.toClassification(finalMark);
 
   document.querySelector('#finalClassification').textContent = finalClassification;
 
   document.querySelector('#gpa').textContent = rules.gpa(marks);
+  } else {
+   const finalMark = b;
+   const finalClassification = rules.toClassification(finalMark);
+   document.querySelector('#finalClassification').textContent = finalClassification;
+
+   document.querySelector('#gpa').textContent = rules.gpa(marks);
+  }
 }
 
 function isAnyMarkUnder40(marks) {
