@@ -26,7 +26,8 @@ function init() {
   const rangeSliders = document.querySelectorAll('input[type="range"]');
   const numberInputs = document.querySelectorAll('input[type="number"]');
   const lockButtons = document.querySelectorAll('.lock-button');
-  
+  const clearButton = document.querySelector('#ClearButton');
+
   for (let i = 0; i < rangeSliders.length; i++) {
     rangeSliders[i].addEventListener('input', () => {
       if (!lockButtons[i].classList.contains('disabled')) {
@@ -45,6 +46,22 @@ function init() {
       numberInputs[i].disabled = !numberInputs[i].disabled;
     });
   }
+
+  // upon pressing the "clear" button
+  clearButton.addEventListener('click', () => {
+    const modules = document.querySelectorAll('input[list="module-list"]');
+    modules.forEach(module => {
+      module.value = "";
+    });
+
+    numberInputs.forEach(number => {
+      number.value = 0;
+    });
+
+    rangeSliders.forEach(slider => {
+      slider.value = 0;
+    });
+  });
 
   /// END of button and slider section
 
