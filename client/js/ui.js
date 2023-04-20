@@ -18,6 +18,16 @@ function init() {
     }
   });
 
+  const clearButton = document.getElementById("ClearButton");
+
+  clearButton.addEventListener("click", function() {
+    const inputs = document.getElementsByTagName("input");
+
+    for (const input of inputs) {
+      input.value = '';
+    }
+  });
+
   const inputs = document.querySelectorAll('input[type="range"]');
   for (const input of inputs) {
     input.addEventListener('input', recalculate);
@@ -139,20 +149,44 @@ async function toggleTheme() {
   }
 }
 
+/// displaying the modules in their respective year text input field
+
 async function loadModules() {
   try {
-    const response = await fetch('modules.txt');
-    const modules = (await response.text()).split('\n');
-    const elems = modules.map(module => {
+    const response = await fetch('modules.csv');
+    const data = await response.text();
+    const modules = data.split('\n').map(row => row.split(',')[0]);// select firs column
+    const modulesFinalYear = modules.filter(module => module.endsWith('final_year'));
+    const modulesSecondYear = modules.filter(module => module.endsWith('second_year'));
+
+    const elemsFinalYear = modulesFinalYear.map(module => {
       const e = document.createElement('option');
       e.value = module;
       return e;
     });
-    document.querySelector('#module-list').append(...elems);
+    const elemsSecondYear = modulesSecondYear.map(module => {
+      const e = document.createElement('option');
+      e.value = module;
+      return e;
+    });
+    console.warn("HERE");
+
+    const textInputs15 = document.querySelectorAll('input[class="15"]');
+    textInputs15.forEach(input => {
+      document.querySelector('#module-list').append(...elemsSecondYear);
+    });
+
+    const textInputs16 = document.querySelectorAll('input[class="16"]');
+    textInputs16.forEach(input => {
+      document.querySelector('#module-list').append(...elemsFinalYear);
+    });console.log("HERE FINISHED");
+
   } catch (e) {
     console.error('Failed to load list of modules, using defaults', e);
   }
 }
+
+// END of module list func
 
 function createShareLink() {
   let link = window.location.origin + window.location.pathname + '?share';
