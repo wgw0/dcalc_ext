@@ -49,19 +49,28 @@ function init() {
 
   // upon pressing the "clear" button
   clearButton.addEventListener('click', () => {
-    const modules = document.querySelectorAll('input[list="module-list"]');
+    const modules = document.querySelectorAll('input');
     modules.forEach(module => {
-      module.value = "";
+      if (module.type === 'checkbox') {
+        module.checked = false; // uncheck any checkboxes
+      } else {
+        module.value = ""; // clear values
+      }
+
+      module.disabled = false; // reenables any inputs that were disabled - 1
     });
 
     numberInputs.forEach(number => {
       number.value = 0;
+      number.disabled = false; // 2
     });
 
     rangeSliders.forEach(slider => {
       slider.value = 0;
+      slider.disabled = false; // 3
     });
   });
+
 
   /// END of button and slider section
 
@@ -149,30 +158,31 @@ async function loadModules() {
     const modulesFinalYear = modules.filter(module => module.endsWith('final_year'));
     const modulesSecondYear = modules.filter(module => module.endsWith('second_year'));
 
-    const elemsFinalYear = modulesFinalYear.map(module => {
-      const e = document.createElement('option');
-      e.value = module;
-      return e;
-    });
     const elemsSecondYear = modulesSecondYear.map(module => {
       const e = document.createElement('option');
       e.value = module;
       return e;
     });
-    console.warn("HERE");
 
-    const textInputs15 = document.querySelectorAll('input[class="15"]');
-    textInputs15.forEach(input => {
-      document.querySelector('#module-list').append(...elemsSecondYear);
+    const elemsFinalYear = modulesFinalYear.map(module => {
+      const e = document.createElement('option');
+      e.value = module;
+      return e;
     });
 
-    const textInputs16 = document.querySelectorAll('input[class="16"]');
-    textInputs16.forEach(input => {
-      document.querySelector('#module-list').append(...elemsFinalYear);
-    });console.log("HERE FINISHED");
+    const textInputsl5 = document.querySelectorAll('#l5');
+    for (const input of textInputsl5) {
+      document.querySelector('#module-list').append(...elemsSecondYear);
+    }
+
+    const textInputsl6 = document.querySelectorAll('#l6');
+    textInputsl6.forEach(input => document.querySelector('#module-list').append(...elemsFinalYear));
+    
 
   } catch (e) {
     console.error('Failed to load list of modules, using defaults', e);
+  } finally {
+    console.log("Finished loading modules.");
   }
 }
 
