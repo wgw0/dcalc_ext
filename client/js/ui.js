@@ -154,9 +154,14 @@ async function loadModules() {
   try {
     const response = await fetch('modules.csv');
     const data = await response.text();
-    const modules = data.split('\n').map(row => row.split(',')[0]);// select firs column
-    const modulesFinalYear = modules.filter(module => module.endsWith('final_year'));
-    const modulesSecondYear = modules.filter(module => module.endsWith('second_year'));
+    const modules = data.split('\n').slice(1);
+    const parsedData = modules.map(row => {
+      const [module_name, module_year] = row.split(',');
+      return { module_name, module_year };
+    });
+    const modulesFinalYear = parsedData.filter(module => module.module_year.trim('final_year'));
+    const modulesSecondYear = parsedData.filter(module => module.module_year.trim('second_year'));
+    console.log("help");
 
     const elemsSecondYear = modulesSecondYear.map(module => {
       const e = document.createElement('option');
@@ -170,19 +175,19 @@ async function loadModules() {
       return e;
     });
 
-    const textInputsl5 = document.querySelectorAll('#l5');
+    const textInputsl5 = document.querySelectorAll('#l5 input[type="text"]');
     for (const input of textInputsl5) {
       document.querySelector('#module-list').append(...elemsSecondYear);
     }
 
-    const textInputsl6 = document.querySelectorAll('#l6');
+    const textInputsl6 = document.querySelectorAll('#l6 input[type="text"]');
     textInputsl6.forEach(input => document.querySelector('#module-list').append(...elemsFinalYear));
     
 
   } catch (e) {
     console.error('Failed to load list of modules, using defaults', e);
   } finally {
-    console.log("Finished loading modules.");
+    console.log('Finished loading modules.');
   }
 }
 
