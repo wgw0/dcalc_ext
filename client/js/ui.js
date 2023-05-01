@@ -74,6 +74,18 @@ function init() {
 
   /// END of button and slider section
 
+  const targetGradeCheck = document.getElementById("targetGradeCheck");
+  const finalGradeDiv = document.getElementById("finalGradeDiv");
+  finalGradeDiv.style.display = 'none'
+  targetGradeCheck.addEventListener('change', () => {
+    if(targetGradeCheck.checked){
+      finalGradeDiv.style.display = 'block'
+    } else {
+      finalGradeDiv.style.display = 'none'
+
+    }
+  })
+
   const fyEntryCheck = document.getElementById("fyEntryCheck");
   fyEntryCheck.addEventListener('change', () => {
     const sectionL5 = document.getElementById("l5");
