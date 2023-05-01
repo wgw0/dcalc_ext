@@ -154,35 +154,24 @@ async function loadModules() {
   try {
     const response = await fetch('modules.csv');
     const data = await response.text();
-    const modules = data.split('\n').slice(1);
-    const parsedData = modules.map(row => {
-      const [module_name, module_year] = row.split(',');
-      return { module_name, module_year };
-    });
-    const modulesFinalYear = parsedData.filter(module => module.module_year.trim('final_year'));
-    const modulesSecondYear = parsedData.filter(module => module.module_year.trim('second_year'));
-    console.log("help");
+    const modules = data.split('\r\n');
+    const modulesFinalYear = [];
+    const modulesSecondYear = [];
+    debugger
+    for(const row of modules){
+  
+      const [name,year] = row.split(',');
+      if(year === "final_year"){
+        const e = document.createElement('option');
+        e.value = name;
+        document.querySelector('#module-list-l6').append(e);
+      } else {
+        const e = document.createElement('option');
+        e.value = name;
+        document.querySelector('#module-list').append(e);
+      }
 
-    const elemsSecondYear = modulesSecondYear.map(module => {
-      const e = document.createElement('option');
-      e.value = module;
-      return e;
-    });
-
-    const elemsFinalYear = modulesFinalYear.map(module => {
-      const e = document.createElement('option');
-      e.value = module;
-      return e;
-    });
-
-    const textInputsl5 = document.querySelectorAll('#l5 input[type="text"]');
-    for (const input of textInputsl5) {
-      document.querySelector('#module-list').append(...elemsSecondYear);
-    }
-
-    const textInputsl6 = document.querySelectorAll('#l6 input[type="text"]');
-    textInputsl6.forEach(input => document.querySelector('#module-list').append(...elemsFinalYear));
-    
+    };
 
   } catch (e) {
     console.error('Failed to load list of modules, using defaults', e);
