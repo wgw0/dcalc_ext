@@ -507,7 +507,7 @@ async function calculateMarksByGrade() {
     if(count === 100) break // To prevent infinite loop
     count++
   }
-
+  console.log(finalClassification);
   l5InputsNumber.forEach((input, index) => {
     const currItem = retval.l5[index]
     if(!input.hasAttribute('disabled')){
@@ -542,6 +542,8 @@ async function calculateMarksByGrade() {
   })
   fypInputNumber.value = retval.fyp.mark
   fypInputRange.value = retval.fyp.mark
+
+  recalculate()
   
 }
 
