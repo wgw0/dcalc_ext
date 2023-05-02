@@ -74,6 +74,12 @@ function init() {
 
   /// END of button and slider section
 
+  const targetGradeBtn = document.getElementById("targetGradeBtn");
+  targetGradeBtn.addEventListener('click', () => {
+    calculateMarksByGrade()
+  })
+  
+
   const targetGradeCheck = document.getElementById("targetGradeCheck");
   const finalGradeDiv = document.getElementById("finalGradeDiv");
   finalGradeDiv.style.display = 'none'
@@ -169,7 +175,7 @@ async function loadModules() {
     const modules = data.split('\r\n');
     const modulesFinalYear = [];
     const modulesSecondYear = [];
-    debugger
+    // debugger
     for(const row of modules){
   
       const [name,year] = row.split(',');
@@ -374,6 +380,274 @@ function highlight(trigger, showHighlight) {
   for (const target of targets) {
     target.classList.toggle('highlight', showHighlight);
   }
+}
+
+function sum(array) {
+  let result = array.reduce(function(a, b){
+    return a + b;
+  });
+  return result
+}
+
+async function calculateMarksByGrade() {
+  console.log('works');
+  const retval = {
+    l5: [],
+    l6: [],
+    fyp: null,
+  };
+  recalculate()
+  // let marks = {
+  //   l5: [45, 56, 67, 78, 89, 90],
+  //   l6: [56, 67, 0, 0],
+  //   fyp: 68,
+  // }
+
+
+  // let retval = {
+  //   "l5": [
+  //       {
+  //           "disabled": true,
+  //           "mark": 68
+  //       },
+  //       {
+  //           "disabled": true,
+  //           "mark": 68
+  //       },
+  //       {
+  //           "disabled": true,
+  //           "mark": 67
+  //       },
+  //       {
+  //           "disabled": true,
+  //           "mark": 70
+  //       },
+  //       {
+  //           "disabled": true,
+  //           "mark": 72
+  //       },
+  //       {
+  //           "disabled": true,
+  //           "mark": 67
+  //       }
+  //   ],
+  //   "l6": [
+  //       {
+  //           "disabled": true,
+  //           "mark": 65
+  //       },
+  //       {
+  //           "disabled": true,
+  //           "mark": 69
+  //       },
+  //       {
+  //           "disabled": false,
+  //           "mark": 0
+  //       },
+  //       {
+  //           "disabled": false,
+  //           "mark": 0
+  //       }
+  //   ],
+  //   "fyp": {
+  //       "disabled": false,
+  //       "mark": 0
+  //   }
+  // }
+
+  /* for testing
+  
+
+  const marks = {
+      l5: [
+        {disabled: true,
+        mark: 50},
+        {disabled: false,
+        mark: 60}
+      ],
+      l6:  [
+        {disabled: true,
+        mark: 50},
+        {disabled: false,
+        mark: 60}
+      ],
+      fyp: {disabled: true,
+            mark: 50},
+  }
+  */
+  
+  const finalGradeSelect = document.getElementById('final-grade-input')
+  // if(finalGradeSelect.value === 'first-class'){
+  //   const minMark = 'test'
+  // }
+
+  const l5InputsRange = document.querySelectorAll('#l5 input[type="range"]');
+  for (const input of l5InputsRange) {
+    retval.l5.push({
+      disabled: input.hasAttribute('disabled'),
+      mark: Number(input.value)
+    });
+  }
+
+  // if (retval.l5.length !== 6) {
+  //   console.error('we do not have enough l5 inputs!');
+  // }
+
+  const l6InputsRange = document.querySelectorAll('#l6 input:not(#fyp)[type="range"]');
+  for (const input of l6InputsRange) {
+    retval.l6.push({
+      disabled: input.hasAttribute('disabled'),
+      mark: Number(input.value)
+    });
+  }
+  
+  const fypInputRange = document.querySelector('input[type="range"]#fyp');
+  retval.fyp = {
+    disabled: fypInputRange.hasAttribute('disabled'),
+    mark: Number(fypInputRange.value)
+  };
+
+  console.log(retval);
+  // reverse rule b (average)
+  // let sumResult = 0
+  // let minAvg = 70
+  // let count = 0
+  // marks.l6.forEach(item => {
+  //   if(item === 0){
+  //     count++
+  //   }
+  //   sumResult += item
+  // })
+  // const result = (2 * minAvg) - sumResult
+  // console.log(`count: ${count}`);
+  // console.log(`sum res: ${sumResult}`);
+  // console.log(`reverse res: ${result}`);
+  
+  
+
+  // if (retval.l6.length !== 4) {
+  //   console.error('we do not have enough l6 inputs!');
+  // }
+
+
+  // console.log(retval);
+
+  // const marks = {
+  //   l5: [],
+  //   l6: [],
+  //   fyp: null,
+  // }
+  // retval.l5.forEach(item => {
+  //   marks.l5.push(item.mark)
+  // })
+  // retval.l6.forEach(item => {
+  //   marks.l6.push(item.mark)
+  // })
+  // marks.fyp = (retval.fyp.mark)
+  // console.log(marks);
+
+  const l5InputsNumber = document.querySelectorAll('#l5 input[type="number"]');
+  const l6InputsNumber = document.querySelectorAll('#l6 input:not(#fyp)[type="number"]');
+  const fypInputNumber = document.querySelector('input[type="number"]#fyp')
+
+  let count = 0 // To control the loop if anything goes wrong
+  const minMark = 40
+  let finalClassification =  0 // undefined
+  while (finalClassification != finalGradeSelect.value) {
+    const marks = {
+      l5: [],
+      l6: [],
+      fyp: null,
+    }
+    
+    // retval.l5.map(obj => !obj.disabled? 20 : obj.mark)
+    // retval.l6.map(obj => !obj.disabled? 20 + 1 : obj.mark)
+    retval.l5.forEach(obj => {
+      if(!obj.disabled && obj.mark === 0) obj.mark = minMark
+      else if(!obj.disabled){
+        obj.mark += 0.4
+        obj.mark = Math.round(obj.mark)
+      }
+    })
+    retval.l6.forEach(obj => {
+      if(!obj.disabled && obj.mark === 0) obj.mark = minMark
+      else if(!obj.disabled){
+        obj.mark += 0.6
+        obj.mark = Math.round(obj.mark)
+      }
+    })
+    if(!retval.fyp.disabled && retval.fyp.mark === 0){
+      retval.fyp.mark = minMark
+    }
+    else if (!retval.fyp.disabled && retval.fyp.mark != 0){
+      retval.fyp.mark += 0.6
+      retval.fyp.mark = Math.round(retval.fyp.mark)
+
+    }
+    // if(!retval.fyp.disabled){
+      //   retval.fyp.mark += 1
+      // }
+      // console.log(retval);
+    retval.l5.forEach(item => {
+      marks.l5.push(item.mark)
+    })
+    retval.l6.forEach(item => {
+      marks.l6.push(item.mark)
+    })
+    marks.fyp = (retval.fyp.mark)
+
+    rules.prepareMarks(marks);
+    const a = rules.ruleA(marks);
+    const b = rules.ruleB(marks);
+    const c = rules.ruleC(marks);
+    const finalMark = Math.max(a, b, c);
+    finalClassification = rules.toClassification(finalMark);
+
+    if(count === 100) break
+    console.log(count);
+    console.log(marks);
+    console.log(finalClassification);
+    count++
+  }
+  // console.log(retval);
+
+  l5InputsNumber.forEach((input, index) => {
+    const currItem = retval.l5[index]
+    if(!input.hasAttribute('disabled')){
+      if(!currItem.disabled) {
+        input.value = currItem.mark
+      }
+    }
+  })
+  l5InputsRange.forEach((input, index) => {
+    const currItem = retval.l5[index]
+    if(!input.hasAttribute('disabled')){
+      if(!currItem.disabled) {
+        input.value = currItem.mark
+      }
+    }
+  })
+  l6InputsRange.forEach((input, index) => {
+    const currItem = retval.l6[index]
+    if(!input.hasAttribute('disabled')){
+      if(!currItem.disabled) {
+        input.value = currItem.mark
+      }
+    }
+  })
+  l6InputsNumber.forEach((input, index) => {
+    const currItem = retval.l6[index]
+    if(!input.hasAttribute('disabled')){
+      if(!currItem.disabled) {
+        input.value = currItem.mark
+      }
+    }
+  })
+  fypInputNumber.value = retval.fyp.mark
+  fypInputRange.value = retval.fyp.mark
+
+  recalculate()
+  
 }
 
 
