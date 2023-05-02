@@ -25,17 +25,19 @@
   <section id="results">
     <div>
       <h2>Indication:</h2>
-      <p id="finalClassification">not enough data</span>.</p>
-      <p>This is the best result from Rules A, B and C.</p>
+      <div id="indicationDiv">
+        <p id="finalClassification">not enough data</span>.</p>
+        <p>This is the best result from Rules A, B and C.</p>
+      </div>
       <div id="finalGradeDiv">
-        <label for="final-grade-input">Choose final grade:</label>
+        <p for="final-grade-input" id="finalClassification">Choose final grade</p>
         <select name="" id="final-grade-input">
           <option value="First-class honours">First Class</option>
           <option value="Second-class honours (upper division)">Second Class, Upper Division</option>
           <option value="Second-class honours (lower division)">Second Class, Lower Division</option>
           <option value="Third-class honours">Third Class</option>
         </select>
-        <input type="button" id="targetGradeBtn" value="Go">
+        <button type="button" id="targetGradeBtn">Go</button>
       </div>
     </div>
     <div id=rules>
