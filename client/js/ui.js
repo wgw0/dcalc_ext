@@ -33,6 +33,9 @@ function init() {
       if (!lockButtons[i].classList.contains('disabled')) {
         numberInputs[i].value = rangeSliders[i].value;
       }
+
+      document.querySelector('#targetGradeBtn').disabled = false ? true : false;
+
       rangeSliders[i].value = numberInputs[i].value;
     });
     
@@ -56,7 +59,7 @@ function init() {
       } else {
         module.value = ""; // clear values
       }
-
+      
       module.disabled = false; // reenables any inputs that were disabled - 1
     });
 
@@ -385,6 +388,7 @@ function highlight(trigger, showHighlight) {
 }
 
 async function calculateMarksByGrade() {
+
   const retval = {
     l5: [],
     l6: [],
@@ -544,7 +548,7 @@ async function calculateMarksByGrade() {
   fypInputRange.value = retval.fyp.mark
 
   recalculate()
-  
+  document.querySelector('#targetGradeBtn').disabled = true;
 }
 
 
