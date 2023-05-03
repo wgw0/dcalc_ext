@@ -27,6 +27,7 @@ function init() {
   const numberInputs = document.querySelectorAll('input[type="number"]');
   const lockButtons = document.querySelectorAll('.lock-button');
   const clearButton = document.querySelector('#ClearButton');
+  const clearUnlockedButton = document.querySelector('#ClearButtonUnlocked')
 
   for (let i = 0; i < rangeSliders.length; i++) {
     rangeSliders[i].addEventListener('input', () => {
@@ -73,6 +74,13 @@ function init() {
       slider.disabled = false; // 3
     });
   });
+
+  clearUnlockedButton.addEventListener('click', () => {
+    const allInputs = Object.values(document.querySelectorAll('#l5 input, #l6 input'));
+    allInputs.filter(input => !input.hasAttribute('disabled') && input.type != 'text').forEach(eachInput => {
+      eachInput.value = 0
+    })
+  })
 
 
   /// END of button and slider section
