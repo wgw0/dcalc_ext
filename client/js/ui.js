@@ -80,6 +80,7 @@ function init() {
     allInputs.filter(input => !input.hasAttribute('disabled') && input.type != 'text').forEach(eachInput => {
       eachInput.value = 0
     })
+    document.querySelector('#targetGradeBtn').disabled = false ? true : false;
   })
 
 
