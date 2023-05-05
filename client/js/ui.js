@@ -26,8 +26,7 @@ function init() {
   const rangeSliders = document.querySelectorAll('input[type="range"]');
   const numberInputs = document.querySelectorAll('input[type="number"]');
   const lockButtons = document.querySelectorAll('.lock-button');
-  const clearButton = document.querySelector('#ClearButton');
-  const clearUnlockedButton = document.querySelector('#ClearButtonUnlocked')
+  const clearUnlockedButton = document.querySelector('#ClearButtonUnlocked');
 
   for (let i = 0; i < rangeSliders.length; i++) {
     rangeSliders[i].addEventListener('input', () => {
@@ -50,30 +49,6 @@ function init() {
       numberInputs[i].disabled = !numberInputs[i].disabled;
     });
   }
-
-  // upon pressing the "clear" button
-  clearButton.addEventListener('click', () => {
-    const modules = document.querySelectorAll('input');
-    modules.forEach(module => {
-      if (module.type === 'checkbox') {
-        module.checked = false; // uncheck any checkboxes
-      } else {
-        module.value = ""; // clear values
-      }
-      
-      module.disabled = false; // reenables any inputs that were disabled - 1
-    });
-
-    numberInputs.forEach(number => {
-      number.value = 0;
-      number.disabled = false; // 2
-    });
-
-    rangeSliders.forEach(slider => {
-      slider.value = 0;
-      slider.disabled = false; // 3
-    });
-  });
 
   clearUnlockedButton.addEventListener('click', () => {
     const allInputs = Object.values(document.querySelectorAll('#l5 input, #l6 input'));
