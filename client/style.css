@@ -67,9 +67,11 @@ body {
   margin: 0 auto;
   max-width: 100%;
   font-family: "Calibri", sans-serif;
-  background: var(--bg);
+  /*background: var(--bg);*/
+  background-color: red;
   color: var(--fg);
   transition: background-color 0.5s ease;
+  
 }
 
 /* Body when the user uses dark Mode.   */
