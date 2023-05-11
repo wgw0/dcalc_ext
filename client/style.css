@@ -58,30 +58,15 @@
  * GENERAL LAYOUT
  *********************************************/
 
-html {
-  max-width: 100%;
-  overflow-x: hidden;
-}
 
-body {
+ body {
   margin: 0 auto;
   max-width: 100%;
   font-family: "Calibri", sans-serif;
-  /*background: var(--bg);*/
-  background-color: red;
+  background: var(--bg);
   color: var(--fg);
   transition: background-color 0.5s ease;
-  
 }
-
-/* Body when the user uses dark Mode.   */
-.dark-mode {
-  background-color: var(--bgdark);
-  color: white;
-  transition: background-color 0.5s ease;
-}
-
-
 
 main {
   max-width: 85em;
@@ -118,17 +103,25 @@ section {
 
 #up-number-input {
   text-align: center;
+  margin: 0 auto;
+}
+
+h4{
+  text-align: center;
 }
 
 .input-container input[type="text"] {
+ 
   font-size: 1.15em;
-  text-align: center;
-  justify-content: center;
+  
   width: 120px;
   padding: 0.5em 0.7em;
   border: 1px solid #888;
   font-family: "Calibri", sans-serif;
   border-radius: 25px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
 }
 
 #display-text {
@@ -225,6 +218,7 @@ input[type="number"]:disabled {
   color: gray;
 }
 
+
 .module output {
   text-align: center;
   justify-content: center;
@@ -237,7 +231,9 @@ ul {
   padding: 0;
 }
 
-input {
+
+
+input, #final-grade-input  {
   background: var(--bg);
   color: var(--fg);
   padding: 0.5ex 1ex;
@@ -248,6 +244,11 @@ input {
 input[type='text'] {
   border: var(--border) solid 1px;
   width: 100%;
+}
+
+#final-grade-input{
+  border-radius: 25px;
+  padding: 7px;
 }
 
 input[disabled] {
@@ -334,7 +335,7 @@ adapted from: https://uiverse.io/e-coders/nervous-chipmunk-49
 }
 
 #copy,
-#ClearButtonUnlocked {
+#ClearButtonUnlocked , button {
   background-color: #FAFBFC;
   border: 1px solid rgba(27, 31, 35, 0.15);
   border-radius: 6px;
@@ -466,7 +467,7 @@ label[for="theme-switch"]:after {
 }
 
 #theme-switch:checked+label[for="theme-switch"] {
-  background-color: #333;
+  background-color: #ccc;
 }
 
 #theme-switch:checked+label[for="theme-switch"]:after {
@@ -515,5 +516,62 @@ dd {
 }
 
 #rule-explanation a:link {
-  color: #3366BB;
+  color: #2e7cff;
 }
+
+#rule-explanation a:visited {
+  color: #6b8bc0;
+}
+
+
+/** Dark Mode ***/
+
+
+
+/* Body when the user uses dark Mode.   */
+.dark-mode {
+  background-color: var(--bgdark);
+  color: white;
+  transition: background-color 0.5s ease;
+}
+
+.dark-mode input, .dark-mode #final-grade-input {
+  background-color: #121212;
+  color:white;
+}
+
+.dark-mode ::placeholder  {
+  color: #d7d7d7;
+  opacity: 1; /* FireFox */
+}
+
+.dark-mode :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #d7d7d7;
+}
+
+.dark-mode ::-ms-input-placeholder { /* Microsoft Edge */
+  color: #d7d7d7;
+}
+.dark-mode #finalClassification, 
+.dark-mode #finalClassification,
+.dark-mode #gpa,
+.dark-mode #rules span {
+  color:#ff88fb;
+}
+
+.dark-mode #rule-explanation a:link {
+  color: #2e7cff;
+}
+
+.dark-mode #rule-explanation a:visited {
+  color: #6b8bc0;
+}
+.dark-mode input[type="checkbox"] {
+  accent-color: #dc40d8;
+}
+.dark-mode input[type=range]::-webkit-slider-thumb {
+  background-color: #c30238;
+  box-shadow: -305px  5px 0 300px #ff88fb;
+}
+
+

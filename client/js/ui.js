@@ -7,17 +7,18 @@ function init() {
 
   const inputField = document.getElementById("up-input");
   const displayText = document.getElementById("display-text");
+  displayText.style= "text-align: center";
   inputField.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
       if (!inputField.value.toUpperCase().startsWith("UP")) {
         displayText.textContent = "Input must start with 'UP'!";
+      
         return;
       }
       displayText.textContent = "Loading course data for: " + inputField.value.toUpperCase();
       getStudentData(inputField.value, displayText);
     }
   });
-
   const inputs = document.querySelectorAll('input[type="range"]');
   for (const input of inputs) {
     input.addEventListener('input', recalculate);
@@ -125,36 +126,20 @@ function init() {
   toggleTheme();
 }
 
+// Function of when the user wants to use dark mode.
 async function toggleTheme() {
-  const toggler = document.querySelector('#theme-switch'),
-        root = document.documentElement,
-        currentTheme = localStorage.getItem('theme') || 'dark';
-
-  if (currentTheme === 'light') {
-    toggler.removeAttribute('checked');
-  } else {
-    toggler.checked = true;
-  }
-
-  root.setAttribute('data-theme', currentTheme);
-
+  const toggler = document.querySelector('#theme-switch');
   toggler.addEventListener('change', handleToggle, false);
-
+  //If the button is clicked adds the css class dark mode to the body
   function handleToggle(e) {
     if (this.checked) {
-      root.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-      console.log('Theme has been changed to: dark');
+      document.body.classList.toggle("dark-mode");  
+      //If the button is clicked it removes the css class dark mode to the body and will go to the default
     } else {
-      root.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-      console.log('Theme has been changed to: light');
+      document.body.classList.remove('dark-mode');
     }
-
-    console.log(`Current theme is: ${localStorage.getItem('theme')}`);
   }
 }
-
 /// displaying the modules in their respective year text input field
 
 async function loadModules() {
