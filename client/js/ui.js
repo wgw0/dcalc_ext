@@ -52,16 +52,7 @@ function init() {
   }
 
   clearUnlockedButton.addEventListener('click', () => {
-    const allInputs = Object.values(document.querySelectorAll('#l5 input, #l6 input'));
-    allInputs.filter(input => !input.hasAttribute('disabled')).forEach(eachInput => {
-      if (eachInput.type === 'text') {
-        eachInput.value = '';
-      } else {
-
-        eachInput.value = 0;
-      }
-    })
-    document.querySelector('#targetGradeBtn').disabled = false ? true : false;
+    clearModules();
   })
 
 
@@ -135,8 +126,13 @@ function init() {
 
 async function clearModules(){
   const allInputs = Object.values(document.querySelectorAll('#l5 input, #l6 input'));
-  allInputs.filter(input => !input.hasAttribute('disabled') && input.type != 'text').forEach(eachInput => {
-    eachInput.value = 0
+  allInputs.filter(input => !input.hasAttribute('disabled')).forEach(eachInput => {
+    if (eachInput.type === 'text') {
+      eachInput.value = '';
+    } else {
+
+      eachInput.value = 0;
+    }
   })
   document.querySelector('#targetGradeBtn').disabled = false ? true : false;
 }
