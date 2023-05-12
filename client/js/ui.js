@@ -52,11 +52,7 @@ function init() {
   }
 
   clearUnlockedButton.addEventListener('click', () => {
-    const allInputs = Object.values(document.querySelectorAll('#l5 input, #l6 input'));
-    allInputs.filter(input => !input.hasAttribute('disabled') && input.type != 'text').forEach(eachInput => {
-      eachInput.value = 0
-    })
-    document.querySelector('#targetGradeBtn').disabled = false ? true : false;
+    clearModules();
   })
 
 
@@ -124,7 +120,18 @@ function init() {
   loadModules();
 
   toggleTheme();
+
+  clearModules();
 }
+
+async function clearModules(){
+  const allInputs = Object.values(document.querySelectorAll('#l5 input, #l6 input'));
+  allInputs.filter(input => !input.hasAttribute('disabled') && input.type != 'text').forEach(eachInput => {
+    eachInput.value = 0
+  })
+  document.querySelector('#targetGradeBtn').disabled = false ? true : false;
+}
+
 
 // Function of when the user wants to use dark mode.
 async function toggleTheme() {
