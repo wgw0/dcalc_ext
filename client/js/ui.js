@@ -52,7 +52,16 @@ function init() {
   }
 
   clearUnlockedButton.addEventListener('click', () => {
-    clearModules();
+    const allInputs = Object.values(document.querySelectorAll('#l5 input, #l6 input'));
+    allInputs.filter(input => !input.hasAttribute('disabled')).forEach(eachInput => {
+      if (eachInput.type === 'text') {
+        eachInput.value = '';
+      } else {
+
+        eachInput.value = 0;
+      }
+    })
+    document.querySelector('#targetGradeBtn').disabled = false ? true : false;
   })
 
 
