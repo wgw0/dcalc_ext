@@ -146,12 +146,12 @@ async function loadModules() {
   try {
     const response = await fetch('modules.csv');
     const data = await response.text();
-    const modules = data.split('\r\n');
-    const modulesFinalYear = [];
-    const modulesSecondYear = [];
-    // debugger
-    for(const row of modules){
-  
+    const modules = data.split('\n');
+    for(let row of modules){
+      console.log(row.includes('\r'));
+      if (row.includes('\r')) {
+        row = row.replace(/\r/g, "");
+      }
       const [name,year] = row.split(',');
       if(year === "final_year"){
         const e = document.createElement('option');
