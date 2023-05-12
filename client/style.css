@@ -197,7 +197,7 @@ input[type=range]::-webkit-slider-runnable-track {
   background: #cec4cf;
 } 
 
-/* Handler and purple trakcer */
+/* Handler and purple tracker */
 input[type=range]::-webkit-slider-thumb {
   border: 0px solid #000000;
   height: 17px;
@@ -552,7 +552,6 @@ dd {
 .dark-mode ::-ms-input-placeholder { /* Microsoft Edge */
   color: #d7d7d7;
 }
-.dark-mode #finalClassification, 
 .dark-mode #finalClassification,
 .dark-mode #gpa,
 .dark-mode #rules span {
